@@ -1,0 +1,29 @@
+const ll oo = 1e18;
+const ll mod = 1e9 + 7;
+const ll N = 2e5 + 123;
+
+void Goriber_solve()
+{
+    int a,v,l,n;
+    cin >> a >> v >> l >> n;
+    if(a <= n){
+        pn;
+        return;
+    }
+    if(v > n){
+        py;
+        return;
+    }
+    pn;
+}
+signed main()
+{
+    Fokinnir_moto_kaj_koris_na
+    int _ = 1,tc = 0;
+    cin >> _;
+    while (_--)
+    {
+        //cout<<"Case "<<++tc<<": ";
+        Goriber_solve();
+    }
+}
