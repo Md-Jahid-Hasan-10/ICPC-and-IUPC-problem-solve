@@ -1,0 +1,139 @@
+//! In The Name Of Allah
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+#define endl '\n'
+#define pb push_back
+#define pob pop_back
+#define make M
+#define F first
+#define S second
+#define all(s) (s).begin(), (s).end()
+#define rall(s) s.rbegin(), s.rend()
+#define sz(x) (int)x.size()
+#define mem(a, b) memset(a, b, sizeof(a))
+#define cnt_bit(x) __builtin_popcountll(x)
+#define getbit(n, i) (((n) & (1LL << (i))) != 0)
+#define msb(x) 64 - __builtin_clzll(x)
+#define setbit(n, i) ((n) |= (1LL << (i)))
+#define hoise cout << "Hoise" << endl;
+#define tham getchar();
+#define TxtIO                         \
+    freopen("sample.in", "r", stdin); \
+    freopen("sample.out", "w", stdout);
+#define Fokinnir_moto_kaj_koris_na \
+    ios_base::sync_with_stdio(0);  \
+    cin.tie(0);                    \
+    cout.tie(0);
+#define py cout << "YES" << endl
+#define pn cout << "NO" << endl
+#define PI acos(-1)
+#define sum_of(A) accumulate(all(A), 0ll)
+#define max_of(A) *max_element(all(A))
+#define min_of(A) *min_element(all(A))
+
+typedef long long ll;
+typedef double dl;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef pair<int, int> pii;
+typedef vector<pii> vii;
+typedef array<int,3> tu;
+
+ll gcd(ll a, ll b) { return __gcd(a, b); }
+ll lcm(ll a, ll b) { return a * (b / gcd(a, b)); }
+
+/*
+auto Goriber_function = [&] (int m) -> int{
+
+};
+*/
+
+const ll oo = 1e18;
+const ll mod = 1e9 + 7;
+const ll N = 1e6 + 123;
+int spf[N],ev[N],odd[N];
+
+void pre(){
+    for(int i = 1; i < N; i ++)spf[i] = i;
+    for(int i = 2; i < N; i++){
+        if(spf[i] == i){
+            for(int j = i * i; j < N; j += i){
+                spf[j] = min(i,spf[j]);
+            }
+        }
+    }
+    for(int i = 2; i < N; i++){
+        int x = i;
+        while(x != 1){
+            int p = spf[x];
+            if(p & 1)odd[i] += p;
+            else ev[i] += p;
+            x /= p;
+        }
+    }
+}
+
+void Goriber_solve()
+{
+    int n,a,b;
+    cin >> n >> a >> b;
+    vi ar(n),ev_cost(n,0),od_cost(n,0);
+    for(int i = 0; i < n; i++){
+        cin >> ar[i];
+        od_cost[i] = ev[ar[i]];
+        ev_cost[i] = odd[ar[i]];
+    }
+    int cost = 0,one = 0;
+    priority_queue<int,vi,greater<int>> e,o;
+    for(int i = 0; i < n; i++){
+        if(ar[i] == 1){
+            one++;
+            continue;
+        }
+        int mn = min(od_cost[i],ev_cost[i]);
+        cost += mn;
+        od_cost[i] -= mn,ev_cost[i] -= mn;
+        if(ev_cost[i] == 0){
+            e.push(od_cost[i]);
+        }
+        else{
+            o.push(ev_cost[i]);
+        }
+    }
+    a -= one;
+    b -= one;
+    if(a > sz(e)){
+        while(sz(e) < a){
+            e.push(o.top());
+            cost += o.top();
+            o.pop();
+        }
+    }
+    else if(b > sz(o)){
+        while(sz(o) < b){
+            o.push(e.top());
+            cost += e.top();
+            e.pop();
+        }
+    }
+    cout << cost << endl;
+}
+
+signed main()
+{
+    Fokinnir_moto_kaj_koris_na
+    pre();
+    int _ = 1,tc = 0;
+    cin >> _;
+    while (_--)
+    {
+        //cout<<"Case "<<++tc<<": ";
+        Goriber_solve();
+    }
+    return 0;
+}
+
+    
