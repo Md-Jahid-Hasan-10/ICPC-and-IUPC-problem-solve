@@ -1,0 +1,170 @@
+//! In The Name Of Allah
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+#define endl '\n'
+#define pb push_back
+#define pob pop_back
+#define make M
+#define F first
+#define S second
+#define all(s) (s).begin(), (s).end()
+#define rall(s) s.rbegin(), s.rend()
+#define sz(x) (int)x.size()
+#define mem(a, b) memset(a, b, sizeof(a))
+#define cnt_bit(x) __builtin_popcountll(x)
+#define getbit(n, i) (((n) & (1LL << (i))) != 0)
+#define msb(x) 64 - __builtin_clzll(x)
+#define setbit(n, i) ((n) |= (1LL << (i)))
+#define hoise cout << "Hoise" << endl;
+#define tham getchar();
+#define TxtIO                         \
+    freopen("sample.in", "r", stdin); \
+    freopen("sample.out", "w", stdout);
+#define Fokinnir_moto_kaj_koris_na \
+    ios_base::sync_with_stdio(0);  \
+    cin.tie(0);                    \
+    cout.tie(0);
+#define py cout << "YES" << endl
+#define pn cout << "NO" << endl
+#define PI acos(-1)
+#define sum_of(A) accumulate(all(A), 0ll)
+#define max_of(A) *max_element(all(A))
+#define min_of(A) *min_element(all(A))
+
+typedef long long ll;
+typedef double dl;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef pair<int, int> pii;
+typedef vector<pii> vii;
+typedef array<int,3> tu;
+
+ll gcd(ll a, ll b) { return __gcd(a, b); }
+ll lcm(ll a, ll b) { return a * (b / gcd(a, b)); }
+
+/*
+auto Goriber_function = [&] (int m) -> int{
+
+};
+*/
+
+const ll oo = 1e18;
+const ll mod = 1e9 + 7;
+const ll N = 2e5 + 123;
+
+const dl EPS = 1e-12;
+
+struct pt3 {
+    dl x, y, z;
+    pt3() : x(0), y(0), z(0) {}
+    pt3(dl a, dl b, dl c) : x(a), y(b), z(c) {}
+    
+    pt3 operator+(const pt3& o) const { return {x + o.x, y + o.y, z + o.z}; }
+    pt3 operator-(const pt3& o) const { return {x - o.x, y - o.y, z - o.z}; }
+    pt3 operator*(dl k) const { return {x * k, y * k, z * k}; }
+    pt3 operator/(dl k) const { return {x / k, y / k, z / k}; }
+    bool operator==(const pt3& o) const { 
+        return abs(x - o.x) < EPS && abs(y - o.y) < EPS && abs(z - o.z) < EPS;
+    }
+};
+
+pt3 cross(const pt3& a, const pt3& b) {
+    return {
+        a.y * b.z - a.z * b.y,
+        a.z * b.x - a.x * b.z,
+        a.x * b.y - a.y * b.x
+    };
+}
+
+dl dot(const pt3& a, const pt3& b) {
+    return a.x * b.x + a.y * b.y + a.z * b.z;
+}
+
+dl sqnorm(const pt3& a) {
+    return a.x * a.x + a.y * a.y + a.z * a.z;
+}
+
+dl abs(const pt3& a) {
+    return sqrt(sqnorm(a));
+}
+
+dl signed_volume6(const pt3& a, const pt3& b, const pt3& c, const pt3& d) {
+    pt3 ab = b - a;
+    pt3 ac = c - a;
+    pt3 ad = d - a;
+    return dot(ab, cross(ac, ad));
+}
+
+bool coplanar(const pt3& a, const pt3& b, const pt3& c, const pt3& d) {
+    dl vol = signed_volume6(a, b, c, d);
+    return abs(vol) < EPS;
+}
+
+pt3 unit(const pt3& a) {
+    dl val = abs(a);
+    if (val < EPS) return pt3(0, 0, 0);
+    return a / val;
+}
+
+pair<pt3, dl> plane_from_points(const pt3& p1, const pt3& p2, const pt3& p3) {
+    pt3 v1 = p2 - p1;
+    pt3 v2 = p3 - p1;
+    pt3 normal = cross(v1, v2);
+    
+    if (abs(normal) < EPS) {
+        normal = pt3(1, 0, 0);
+    }
+    
+    dl d = -dot(normal, p1);
+    return {normal, d};
+}
+
+void Goriber_solve()
+{
+    pt3 P[4];
+    for (int i = 0; i < 4; i++) {
+        dl x, y, z;
+        cin >> x >> y >> z;
+        P[i] = pt3(x, y, z);
+    }
+    pt3 M = (P[2] + P[3]) * 0.5; 
+
+    pt3 v1 = P[1] - P[0];
+    pt3 v2 = M - P[0];
+    pt3 normal = cross(v1, v2);
+    
+    if (abs(normal) < EPS) {
+        M = (P[1] + P[3]) * 0.5;
+        v1 = P[2] - P[0];
+        v2 = M - P[0];
+        normal = cross(v1, v2);
+    }
+    
+    dl d = -dot(normal, P[0]);
+
+    dl norm_val = abs(normal);
+    if (norm_val > EPS) {
+        normal = normal / norm_val;
+        d = d / norm_val;
+    }
+    cout << normal.x << ' ' << normal.y << ' ' << normal.z << ' ' << d << '\n';
+}
+
+signed main()
+{
+    Fokinnir_moto_kaj_koris_na
+    cout << fixed << setprecision(8);
+    int _ = 1,tc = 0;
+    cin >> _;
+    while (_--)
+    {
+        //cout<<"Case "<<++tc<<": ";
+        Goriber_solve();
+    }
+    return 0;
+}
+
+    
