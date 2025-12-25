@@ -1,0 +1,127 @@
+//! In The Name Of Allah
+
+/*********************************************************************\
+*!          |       *        |       | ___  | @                       |
+*!          |      * *       |       |  |   |  @                      |
+*!          |     *   *      |       |  |   |   @                     |
+*!          |    *******     |-------|  |   |    @                    |
+*! |*       |   *       *    |       |  |   |   @                     |
+*! |        |  *         *   |       |  |   |  @                      |
+*! |________| *           *  |       | ___  | @                       |
+*!                                                                    |
+*!  codeforces = Jahid__Noob                                          |
+*!  mail =  2227Jahid@gmail.com                                       |
+*!  IIT,Jahangirnagar University(51)                                  |
+*!                                                                    |
+**********************************************************************/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+#define endl '\n'
+#define pb push_back
+#define pob pop_back
+#define make M
+#define F first
+#define S second
+#define all(s) (s).begin(), (s).end()
+#define rall(s) s.rbegin(), s.rend()
+#define sz(x) (int)x.size()
+#define mem(a, b) memset(a, b, sizeof(a))
+#define cnt_bit(x) __builtin_popcountll(x)
+#define getbit(n, i) (((n) & (1LL << (i))) != 0)
+#define msb(x) 64 - __builtin_clzll(x)
+#define setbit(n, i) ((n) |= (1LL << (i)))
+#define hoise cout << "Hoise" << endl;
+#define tham getchar();
+#define TxtIO                         \
+    freopen("sample.in", "r", stdin); \
+    freopen("sample.out", "w", stdout);
+#define Fokinnir_moto_kaj_koris_na \
+    ios_base::sync_with_stdio(0);  \
+    cin.tie(0);                    \
+    cout.tie(0);
+#define py cout << "YES" << endl
+#define pn cout << "NO" << endl
+#define PI acos(-1)
+#define sum_of(A) accumulate(all(A), 0ll)
+#define max_of(A) *max_element(all(A))
+#define min_of(A) *min_element(all(A))
+
+typedef long long ll;
+typedef double dl;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef pair<int, int> pii;
+typedef vector<pii> vii;
+typedef array<int,3> tu;
+
+ll gcd(ll a, ll b) { return __gcd(a, b); }
+ll lcm(ll a, ll b) { return a * (b / gcd(a, b)); }
+
+/*
+auto Goriber_function = [&] (int m) -> int{
+
+};
+*/
+
+const ll oo = 1e18;
+const ll mod = 1e9 + 7;
+const ll N = 2e5 + 123;
+
+void Goriber_solve()
+{
+    string s;
+    cin >> s;
+    int n = sz(s);
+    set<int> st;
+    for(int i = 0; i < n; i++){
+        st.insert(i);
+    }
+    for(int i = 0; i+1 < n; i++){
+        if(s[i] == s[i+1]){
+            if(st.count(i) && st.count(i+1)){
+                st.erase(i);
+                st.erase(i+1);
+            }
+        }
+        if(st.count(i)){
+            auto it = st.lower_bound(i);
+            auto it2 = it;
+            if(it2 != st.begin()){
+                it2--;
+            }
+            if(*it != *it2 && s[*it] == s[*it2]){
+                st.erase(*it);
+                st.erase(*it2);
+            }
+        }
+    }
+    if(sz(st) == 2){
+        auto it = st.begin();
+        auto it2 = it;
+        it2++;
+        if(*it != *it2 && s[*it] == s[*it2]){
+            st.erase(*it);
+            st.erase(*it2);
+        }
+    }
+    if(sz(st) == 0)py;
+    else pn;
+}
+
+signed main()
+{
+    Fokinnir_moto_kaj_koris_na
+    int _ = 1,tc = 0;
+    cin >> _;
+    while (_--)
+    {
+        //cout<<"Case "<<++tc<<": ";
+        Goriber_solve();
+    }
+    return 0;
+}
+
+    
