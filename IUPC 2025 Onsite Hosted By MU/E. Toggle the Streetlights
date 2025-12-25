@@ -1,0 +1,102 @@
+//! In The Name Of Allah
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+#define endl '\n'
+#define pb push_back
+#define pob pop_back
+#define make M
+#define F first
+#define S second
+#define all(s) (s).begin(), (s).end()
+#define rall(s) s.rbegin(), s.rend()
+#define sz(x) (int)x.size()
+#define mem(a, b) memset(a, b, sizeof(a))
+#define cnt_bit(x) __builtin_popcountll(x)
+#define getbit(n, i) (((n) & (1LL << (i))) != 0)
+#define msb(x) 64 - __builtin_clzll(x)
+#define setbit(n, i) ((n) |= (1LL << (i)))
+#define hoise cout << "Hoise" << endl;
+#define tham getchar();
+#define TxtIO                         \
+    freopen("sample.in", "r", stdin); \
+    freopen("sample.out", "w", stdout);
+#define Fokinnir_moto_kaj_koris_na \
+    ios_base::sync_with_stdio(0);  \
+    cin.tie(0);                    \
+    cout.tie(0);
+#define py cout << "YES" << endl
+#define pn cout << "NO" << endl
+#define PI acos(-1)
+#define sum_of(A) accumulate(all(A), 0ll)
+#define max_of(A) *max_element(all(A))
+#define min_of(A) *min_element(all(A))
+
+typedef long long ll;
+typedef double dl;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef pair<int, int> pii;
+typedef vector<pii> vii;
+typedef array<int,3> tu;
+
+ll gcd(ll a, ll b) { return __gcd(a, b); }
+ll lcm(ll a, ll b) { return a * (b / gcd(a, b)); }
+
+/*
+auto Goriber_function = [&] (int m) -> int{
+
+};
+*/
+
+const ll oo = 1e18;
+const ll mod = 1e9 + 7;
+const ll N = 2e5 + 123;
+void f(string &s){
+    string res = s;
+    for(int i = 1; i + 1 < sz(s); i++){
+        if(s[i-1] == '1' && s[i+1] == '1'){
+            if(s[i] == '1')res[i] = '0';
+            else res[i] = '1';
+        }
+    }
+    s = res;
+}
+void Goriber_solve()
+{
+    int n,k;
+    cin >> n >> k;
+    string s;
+    cin >> s;
+    if(k == 0){
+        cout << s << endl;
+        return;
+    }
+    if(k >= 1){
+        f(s);
+        k--;
+    }
+    if(k >= 1){
+        f(s);
+        k--;
+    }
+    if(k & 1)f(s);
+    cout << s << endl;
+}
+
+signed main()
+{
+    Fokinnir_moto_kaj_koris_na
+    int _ = 1,tc = 0;
+    cin >> _;
+    while (_--)
+    {
+        //cout<<"Case "<<++tc<<": ";
+        Goriber_solve();
+    }
+    return 0;
+}
+
+    
