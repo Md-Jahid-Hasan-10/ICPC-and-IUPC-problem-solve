@@ -1,0 +1,136 @@
+//! In The Name Of Allah
+
+/*********************************************************************\
+*!          |       *        |       | ___  | @                       |
+*!          |      * *       |       |  |   |  @                      |
+*!          |     *   *      |       |  |   |   @                     |
+*!          |    *******     |-------|  |   |    @                    |
+*! |*       |   *       *    |       |  |   |   @                     |
+*! |        |  *         *   |       |  |   |  @                      |
+*! |________| *           *  |       | ___  | @                       |
+*!                                                                    |
+*!  codeforces = Jahid__Noob                                          |
+*!  mail =  2227Jahid@gmail.com                                       |
+*!  IIT,Jahangirnagar University(51)                                  |
+*!                                                                    |
+**********************************************************************/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+#define endl '\n'
+#define pb push_back
+#define pob pop_back
+#define make M
+#define F first
+#define S second
+#define all(s) (s).begin(), (s).end()
+#define rall(s) s.rbegin(), s.rend()
+#define sz(x) (int)x.size()
+#define mem(a, b) memset(a, b, sizeof(a))
+#define cnt_bit(x) __builtin_popcountll(x)
+#define getbit(n, i) (((n) & (1LL << (i))) != 0)
+#define msb(x) 64 - __builtin_clzll(x)
+#define setbit(n, i) ((n) |= (1LL << (i)))
+#define hoise cout << "Hoise" << endl;
+#define tham getchar();
+#define TxtIO                         \
+    freopen("sample.in", "r", stdin); \
+    freopen("sample.out", "w", stdout);
+#define Fokinnir_moto_kaj_koris_na \
+    ios_base::sync_with_stdio(0);  \
+    cin.tie(0);                    \
+    cout.tie(0);
+#define py cout << "YES" << endl
+#define pn cout << "NO" << endl
+#define PI acos(-1)
+#define sum_of(A) accumulate(all(A), 0ll)
+#define max_of(A) *max_element(all(A))
+#define min_of(A) *min_element(all(A))
+
+typedef long long ll;
+typedef double dl;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef pair<int, int> pii;
+typedef vector<pii> vii;
+typedef array<int,3> tu;
+
+ll gcd(ll a, ll b) { return __gcd(a, b); }
+ll lcm(ll a, ll b) { return a * (b / gcd(a, b)); }
+
+/*
+auto Goriber_function = [&] (int m) -> int{
+
+};
+*/
+
+const ll oo = 1e18;
+const ll mod = 1e9 + 7;
+const ll N = 305;
+set<int> graph[N];
+vi path;
+int ar[N],n;
+
+bool dfs(int node,int papa,int t){
+    path.pb(node);
+    if(node == t)return 1;
+    for(auto u : graph[node]){
+        if(u == papa)continue;
+        if(dfs(u,node,t))return 1;
+    }
+    path.pop_back();
+    return 0;
+}
+void Goriber_solve()
+{
+    cin >> n;
+    for(int i = 1; i <= n; i++){
+        graph[i].clear();
+        cin >> ar[i];
+    }
+    for(int i = 1; i < n; i++){
+        int u,v;
+        cin >> u >> v;
+        graph[u].insert(v);
+        graph[v].insert(u);
+    }
+    vector<tu> ans;
+    for(int i = 1; i < n; i++){
+        int s = ar[i];
+        int t = ar[i+1];
+        while(!graph[s].count(t)){
+            path.clear();
+            bool la = dfs(s,-1,t);
+            int pp = sz(path);
+            int a = path[pp - 1];
+            int b = path[pp - 2];
+            int c = path[pp - 3];
+            ans.pb({a,b,c});
+            graph[a].erase(b);
+            graph[b].erase(a);
+            graph[a].insert(c);
+            graph[c].insert(a);
+        }
+    }
+    cout << sz(ans) << endl;
+    for(auto u : ans){
+        cout << u[0] << " " << u[1] << " " << u[2] << endl;
+    }
+}
+
+signed main()
+{
+    Fokinnir_moto_kaj_koris_na
+    int _ = 1,tc = 0;
+    cin >> _;
+    while (_--)
+    {
+        //cout<<"Case "<<++tc<<": ";
+        Goriber_solve();
+    }
+    return 0;
+}
+
+    
