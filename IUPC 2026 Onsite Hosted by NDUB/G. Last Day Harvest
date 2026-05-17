@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+map<long long,int> factorize(long long n) {
+    map<long long,int> f;
+    for (long long i = 2; i*i <= n; i++) {
+        while (n % i == 0) { f[i]++; n /= i; }
+    }
+    if (n > 1) f[n]++;
+    return f;
+}
+
+vector<long long> getDivisors(map<long long,int>& factors) {
+    vector<long long> divs = {1};
+    for (auto& [p, e] : factors) {
+        int sz = divs.size();
+        long long pe = 1;
+        for (int i = 0; i < e; i++) {
+            pe *= p;
+            for (int j = 0; j < sz; j++)
+                divs.push_back(divs[j] * pe);
+        }
+    }
+    sort(divs.begin(), divs.end());
+    return divs;
+}
+
+int main(){
+    int t;
+    scanf("%d", &t);
+    while (t--) {
+        long long x, y;
+        cin >> x >> y;
+        
+        auto fx = factorize(x);
+        auto fy = factorize(y);=
+        map<long long,int> fxy = fx;
+        for (auto& [p, e] : fy) fxy[p] += e;
+        
+        vector<long long> divs = getDivisors(fxy);
+        
+        printf("%d\n", (int)divs.size());
+        for (long long a : divs) {
+            long long b = (x * y) / a;
+            printf("%lld %lld\n", x + a, y + b);
+        }
+    }
+    return 0;
+}
